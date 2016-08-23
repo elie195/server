@@ -30,6 +30,7 @@ namespace OC\Core\Controller;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataDisplayResponse;
+use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\File;
 use OCP\Files\IRootFolder;
@@ -111,7 +112,7 @@ class AvatarController extends Controller {
 	 *
 	 * @param string $userId
 	 * @param int $size
-	 * @return JSONResponse|DataDisplayResponse
+	 * @return JSONResponse|FileDisplayResponse
 	 */
 	public function getAvatar($userId, $size) {
 		if ($size > 2048) {
@@ -122,10 +123,9 @@ class AvatarController extends Controller {
 
 		try {
 			$avatar = $this->avatarManager->getAvatar($userId)->getFile($size);
-			$resp = new DataDisplayResponse($avatar->getContent(),
+			$resp = new FileDisplayResponse($avatar,
 				Http::STATUS_OK,
 				['Content-Type' => $avatar->getMimeType()]);
-			$resp->setETag($avatar->getEtag());
 		} catch (NotFoundException $e) {
 			$user = $this->userManager->get($userId);
 			$resp = new JSONResponse([
