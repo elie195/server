@@ -51,12 +51,24 @@ class CheckerTest extends TestCase {
 
 	public function setUp() {
 		parent::setUp();
-		$this->environmentHelper = $this->getMock('\OC\IntegrityCheck\Helpers\EnvironmentHelper');
-		$this->fileAccessHelper = $this->getMock('\OC\IntegrityCheck\Helpers\FileAccessHelper');
-		$this->appLocator = $this->getMock('\OC\IntegrityCheck\Helpers\AppLocator');
-		$this->config = $this->getMock('\OCP\IConfig');
-		$this->cacheFactory = $this->getMock('\OCP\ICacheFactory');
-		$this->appManager = $this->getMock('\OCP\App\IAppManager');
+		$this->environmentHelper = $this->getMockBuilder('\OC\IntegrityCheck\Helpers\EnvironmentHelper')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->fileAccessHelper = $this->getMockBuilder('\OC\IntegrityCheck\Helpers\FileAccessHelper')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->appLocator = $this->getMockBuilder('\OC\IntegrityCheck\Helpers\AppLocator')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->config = $this->getMockBuilder('\OCP\IConfig')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->cacheFactory = $this->getMockBuilder('\OCP\ICacheFactory')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->appManager = $this->getMockBuilder('\OCP\App\IAppManager')
+			->disableOriginalConstructor()
+			->getMock();
 
 		$this->cacheFactory
 			->expects($this->any())
