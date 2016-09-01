@@ -115,4 +115,19 @@ interface IRoute {
 	 * @since 7.0.0
 	 */
 	public function put();
+
+	/**
+	 * Set whether or not the filesystem should be setup to handle this route
+	 *
+	 * @param $filesystem
+	 * @return \OCP\Route\IRoute
+	 */
+	public function setupFilesystem($filesystem);
+
+	/**
+	 * Whether or not the filesystem should be setup to handle this route
+	 *
+	 * @return bool
+	 */
+	public function requiresFilesystem();
 }
